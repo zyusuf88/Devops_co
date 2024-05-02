@@ -5,12 +5,19 @@
 - [Layer 2 - Data link layer](#layer-2---data-link-layer)
 - [Layer 3 - Network layer](#layer-3---network-layer)
 - [Decimal to Binary Conversion (IP Addressing)](#decimal-to-binary-conversion-ip-addressing)
-  - [Converting decimal to Binary `133.33.33.7`](#converting-decimal-to-binary-13333337)
-    - [Following the method above you continue for 133.**33.33.7** to get :](#following-the-method-above-you-continue-for-13333337-to-get-)
+    - [Converting decimal to Binary `133.33.33.7`](#converting-decimal-to-binary-13333337)
 - [Layer 4\&5 - Session \& Transport layers](#layer-45---session--transport-layers)
   - [Segments](#segments)
 - [Network Address Translation (NAT)](#network-address-translation-nat)
-  - [](#)
+  - [Static Network address translation](#static-network-address-translation)
+- [Stateful vs Stateless Firewalls](#stateful-vs-stateless-firewalls)
+  - [Stateful](#stateful)
+  - [Stateless](#stateless)
+  - [Which is better?](#which-is-better)
+- [Internet Protocol Security (IP Sec)](#internet-protocol-security-ip-sec)
+    - [IKE (internet key exchange)(slow \& heavy) PHASE 1:](#ike-internet-key-exchangeslow--heavy-phase-1)
+    - [IKE (internet key exchange)(fast \& agile) PHASE 2:](#ike-internet-key-exchangefast--agile-phase-2)
+- [Application (Layer 7) Firewalls](#application-layer-7-firewalls)
 # Networking
 
 - Networking is a fundamental component of DevOps practices
@@ -122,13 +129,12 @@ The Open Systems Interconnection (OSI) model describes seven layers that compute
   
 ![](images/decimal-binary.png)
 
-   ## Converting decimal to Binary `133.33.33.7`
+  ### Converting decimal to Binary `133.33.33.7`
 
 ![](images/decimal-binary-conversion.png)
 
 
-
-### Following the method above you continue for 133.**33.33.7** to get : 
+Following the method above you continue for 133.**33.33.7** to get : 
 
 ![](images/conversion%20.png)
 
@@ -167,6 +173,92 @@ The Open Systems Interconnection (OSI) model describes seven layers that compute
 - To give internet access to private devices we need to use Network Address Translation (NAT)
    - Translates **Private** IPv4 address to** Public**
 - NAT also provides some security benefits 
+-  private addresses in a network architecture are unable to communicate directly with public internet-based services due to the private and public addresses being incompatible for direct communication. 
+-  To solve this problem, Network Address Translation (NAT) is used to translate private addresses to public IP addresses that can communicate with the services.
   
-   ## 
-   - 
+    ### NAT has three basic protocols: Static, Dynamic and Port Address Translation (PAT):
+
+  
+   ## Static Network address translation  
+      -  With Static NAT there will be a fixed public address for every privately IP addressed device that needs to send information across the router. S**o, if you need more than one device on the private network that needs access to the internet you will need multiple public IP addresses.**
+  
+     ## Dynamic Network address translation 
+      - Dynamic NAT allows devices to temporarily borrow public IP addresses from a pool instead of being permanently allocated one. An example is given where four devices require public addressing, but only two public IP addresses are available. 
+      - Multiple private devices can share a single public IP as long as they use the allocations at different times.
+      -  However, if all public IPs in the pool are in use, access to the internet will fail. 
+  
+     ![](images/dynamic-static.png)
+
+      ## Port Address translation (PAT)
+      -  PAT is an advanced, more flexible type of dynamic NAT. PAT maps several private IP addresses to a single public address at the same time. 
+      - PAT works by assigning unique port numbers to each connection session to distinguish between them.
+      - The NAT table holds all the critical information regarding which public IP/port combination has been mapped to which private IP/port combination. So, one public IP can represent multiple private IP addresses by using unique port numbers.
+
+
+> [!IMPORTANT]  
+> **PAT is the most widely used and trusted form of NAT. The diagram below gives a description of how PAT operates:**         
+ 
+![](images/NAT%20Table.png)
+
+   # Stateful vs Stateless Firewalls
+  Stateful and stateless firewalls are two fundamental types of network security devices that filter and **control the flow of traffic between networks.**
+
+   ## Stateful 
+   - **Stateful** firewalls maintain state information about active network connection
+   - It is like a smart security guard who remembers past interactions. It keeps track of the state of active connections passing through it.
+   - If a data packet leaves your network, the stateful firewall** remembers where it came** from and where it's going.
+   -  If a response comes back, it checks to see if it matches a known, approved connection. It's like recognizing a visitor you've already let in.
+  
+  ## Stateless 
+- **Stateless** firewalls examine each data packet passing through it in isolation, without considering past connections. It checks the packet against predetermined rules, like a checklist.
+-  If the packet meets the criteria, it's allowed through; otherwise, **it's blocked**.
+-   It doesn't remember past interactions or connections—it just follows the rules.
+
+![](images/stateless_vs_stateful.png)
+
+## Which is better?
+1. **Stateless for smaller businesses** - Because there is bound to be less incoming traffic than with a large enterprise, there may also be fewer threats. This could make them relatively straightforward to set up by a small business owner.
+2. **Stateful firewalls for larger enterprises** - Because they offer dynamic packet filtering, they can adapt to a variety of threats using data gathered from previous network activity to ascertain the danger level of novel threats.
+
+#  Internet Protocol Security (IP Sec) 
+- They are Group of protocols that work together to:
+   - set up a **secure networking tunnels across insecure networks**
+   -  It is often used to set up VPNs, and it works by encrypting IP packets, along with authenticating the source where the packets come from.
+ - IPSEC has 2 main phases in setting up a VPN connection
+  
+  ### IKE (internet key exchange)(slow & heavy) PHASE 1:
+  The main purpose of IKE phase 1 is to establish a secure tunnel that we can use for IKE phase 2.
+    
+  1.  The phase involves authenticating routers at both sites using certificates or pre-shared keys.
+  2.  Then the Diffie-Hellman key exchange, through which each side creates its own private key and a corresponding public key that is exchanged. 
+  3. After both private and public keys are exchanged, each side uses the public key of the other party and their own private key to derive the Diffie-Hellman key, which is then used to exchange key material and agreements. 
+  4. Finally, a symmetrical key is generated, which is used for encryption. 
+   
+ **Phase two is used to agree on how the VPN will be constructed, and it is built on top of phase one to form a security association.**
+### IKE (internet key exchange)(fast & agile) PHASE 2:
+
+In Phase 2 this is where the actual secure data transmission parameters are established
+   1.  Each VPN side sends a proposal containing encryption, authentication, and other parameters for securing the data transmission.
+   2.  The sides compare proposals and select a mutually acceptable combination of security parameters for Phase 2
+   3. With the method chosen, they set up a secure connection. They exchange keys and other info needed to talk secretly. 
+   4. With the SAs established, data can be securely transmitted
+   5. During Phase 2, the SAs are maintained by periodically renegotiating security parameters or rekeying to ensure ongoing security.
+
+
+> [!IMPORTANT]  
+> **In summrary - Phase 1 of IPsec VPN negotiation is like setting up a secret phone line between two friends. They agree on how to encrypt their messages and make sure they're talking to the right person. Once they're sure they're safe, Phase 2 is about deciding how to talk securely and creating a connection to exchange messages without anyone eavesdropping.**   
+
+
+
+# Application (Layer 7) Firewalls
+
+ Interacts directly with users and provides network services to applications. It's where applications like email, web browsers, and file transfer programs operate, allowing users to interact with the network.
+
+Most user-facing protocols and applications like HTTP, FTP and SMTP operate on layer 7.
+ 
+   - Layer 7 is designed to protect networks by inspecting and filtering traffic at the application layer of the TCP/IP stack
+   - Application layer firewalls can understand and interpret the content of network packets, making them more effective at detecting and blocking specific types of threats.
+
+
+
+![](images/layer7.png)

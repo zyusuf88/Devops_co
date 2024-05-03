@@ -29,7 +29,7 @@ Below is an example of the **Structure  of the request**
 ![HTTP](images/structure%20of%20http%20request.webp)
 
    
-6. The server at "www.example.com" receives the request and processes it. It locates the requested web page and prepares to send it back to your web browser.
+6. The server at `www.example.com` receives the request and processes it. It locates the requested web page and prepares to send it back to your web browser.
    
 7. The server sends the web page data in the form of HTTP (Hypertext Transfer Protocol) response packets back to your web browser over the established TCP connection.
 
@@ -47,4 +47,4 @@ Below is an example of the **Structure  of the request**
 
 
 8. Your web browser receives the responses and interprets them to the web page on your screen.
-And now you see the content of "www.example.com" displayed in your web browser.
+And now you see the content of `www.example.com` displayed in your web browser.

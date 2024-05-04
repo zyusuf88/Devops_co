@@ -1,10 +1,10 @@
 # Office Network Set up
 
 
-Network redundancy helps ensure companies can access crucial procedures or information, even if components of their network malfunction. Practical measures need to be undertaken to ensure the network remains in operation for employees and customers. In this office setup I have implemented: 
+Network redundancy helps ensure companies can access crucial procedures or information, even if components of their network malfunction. Practical measures need to be undertaken to ensure the network remains in operation for employees and customers.
 
 
-
+![Network-diagram](https://github.com/zyusuf88/Devops_co/assets/97973445/d10951d8-73fa-4c38-ba79-b6495666efd0)
 
 
 

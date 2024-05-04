@@ -1,4 +1,4 @@
-## Table of Content:
+## Table of Contents:
 - [Networking](#networking)
 - [What Is the OSI Model](#what-is-the-osi-model)
 - [Layer 1 - Physical layer](#layer-1---physical-layer)

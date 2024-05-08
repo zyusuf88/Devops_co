@@ -8,6 +8,7 @@
     - [Converting decimal to Binary `133.33.33.7`](#converting-decimal-to-binary-13333337)
 - [Layer 4\&5 - Session \& Transport layers](#layer-45---session--transport-layers)
   - [Segments](#segments)
+- [Layer 6 - Transportation layer](#layer-6---transportation-layer)
 - [Network Address Translation (NAT)](#network-address-translation-nat)
   - [Static Network address translation](#static-network-address-translation)
 - [Stateful vs Stateless Firewalls](#stateful-vs-stateless-firewalls)
@@ -138,15 +139,6 @@ Following the method above you continue for 133.**33.33.7** to get :
 
 ![](images/conversion%20.png)
 
-# Layer 6 - Transportation layer
-
-   - The presentation layer, prepares data so that it can be used by the application layer (layer 7)
-   - It handles translation, encryption, and compression of data, ensuring compatibility between communicating devices.
-   - Layer 6 **translates incoming data** into a format understandable so that it can present the application layer with unencrypted, readable data.
-
-<img width="435" alt="image" src="https://github.com/zyusuf88/Devops_co/assets/97973445/8e9d55ab-b5c0-4885-b466-1a495fa8239a">
-
-
 
 # Layer 4&5 - Session & Transport layers 
 -  The Transport Layer (Layer 4) ensures reliable end-to-end communication and data delivery across networks. 
@@ -173,7 +165,15 @@ Following the method above you continue for 133.**33.33.7** to get :
    -  terminates communication sessions between devices.
 -  It **ensures synchronized and reliable data exchange**, handles session setup and termination, manages dialog control to prevent conflicts, and implements synchronization points and checkpointing for resuming interrupted sessions. 
 -  It's crucial for applications like file transfer, remote desktop connections, and online gaming, where maintaining a seamless user experience is essential.
--  
+  
+# Layer 6 - Transportation layer
+
+   - The presentation layer, prepares data so that it can be used by the application layer (layer 7)
+   - It handles translation, encryption, and compression of data, ensuring compatibility between communicating devices.
+   - Layer 6 **translates incoming data** into a format understandable so that it can present the application layer with unencrypted, readable data.
+
+<img width="435" alt="image" src="https://github.com/zyusuf88/Devops_co/assets/97973445/8e9d55ab-b5c0-4885-b466-1a495fa8239a">
+
 
 
 # Network Address Translation (NAT)

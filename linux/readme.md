@@ -1,130 +1,241 @@
 
-# zshrc file
+# Table of contents:
 
-1. open the file : `nano ~/.zshrc`
-2. And then set the ZSH_THEME value to whatever value you want to use like this:
-`ZSH_THEME="robbyrussell"`
-### If having trouble with zsh files,  delete then redownlaod:
-
-`rm -rf ~/.oh-my-zsh`
-`rm ~/.zshrc`
-`cp ~/.zshrc.pre-oh-my-zsh ~/.zshrc`
-`source ~/.zshrc`
-#### after that install again
-`sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"`
-
-
-# Scripting
-
-How to run a script from anywhere without specifing the path
-
-1. Place the file in the PATH. run: `echo $PATH` . Any file in this directories can be run from anywhere
-2. choose a file path for e.g: `/usr/local/bin` Type: `sudo mv name-of-file.sh /usr/local/bin/name-of-file`
-3. chmod as this is a script : `sudo chmod +x /usr/local/bin/name-of-file`
-4. *now you can run the `name-of-the-file` withought using bash or .sh. It will still run in ANY directory*
-
-
-# Comments: 
-
-```bash
-#!/bin/bash 
-
-echo "Hello World" 
-
-# This is a commment 
+- [Table of contents:](#table-of-contents)
+- [What is Linux?](#what-is-linux)
+      - [Why is it so popular?](#why-is-it-so-popular)
+  - [ Linux Commands for System Information: ](#-linux-commands-for-system-information-)
+  - [ User and System Information: ](#-user-and-system-information-)
+  - [ Process Information and History: ](#-process-information-and-history-)
+  - [ Working with Files and Directories: ](#-working-with-files-and-directories-)
+  - [ Downloading an image: ](#-downloading-an-image-)
+  - [ File and Directory Manipulation: ](#-file-and-directory-manipulation-)
+  - [ File Creation and Editing: ](#-file-creation-and-editing-)
+  - [ Viewing File Content ](#-viewing-file-content-)
+  - [ Searching within a Files: ](#-searching-within-a-files-)
+  - [ Moving files : ](#-moving-files--)
+  - [ Adding and Removing Files: ](#-adding-and-removing-files-)
+  - [ tree: ](#-tree-)
+  - [ Permission Groups: ](#-permission-groups-)
+  - [ Changing File Permissions: ](#-changing-file-permissions-)
+  - [ Making a Basic Shell Script: ](#-making-a-basic-shell-script-)
+      - [Running the Script:](#running-the-script)
+  - [ Making a persistent environment variable: ](#-making-a-persistent-environment-variable-)
+  - [How to view information about processes running on the system:](#how-to-view-information-about-processes-running-on-the-system)
+    - [Parent and Child Processes:](#parent-and-child-processes)
+  - [When managing processes:](#when-managing-processes)
+    - [Managing Processes:](#managing-processes)
+    - [kill Command:](#kill-command)
 
 
+# What is Linux?
 
-# Renaming all .txt files to .bk using for loop:
+Linux is an open-source operating system that serves as the foundation for various Linux distributions
 
-#for file in *.txt; do
-#   mv "$file" "$(file%.txt).bak"
-#done
+#### Why is it so popular?
 
-: ' 
-
-Looping through all .txt files in the current directory using the mv command to rename each .txt file to .bk
-The '$(file%.txt).bak' is the syntax that removes the .txt extension and appends .bak
-
-' 
-```
-# Variables
-
- - Bash variables are like containers that hold different data types, including strings, numbers, and arrays.
- -  To create a variable, simply assign a value to it using the assignment operator, and access its value by preceding the variable name with a dollar sign.
- -   Variables can hold various data types, and Bash also allows for dynamic string output using variable interpolation. 
- -   open a file text editor e.g: `nano var.sh` OR `vi var.sh` 
- -   type: 
-```bash                                                      
-#!/bin/bash
-
-greeting="Hello World!!"
+- **Open Source:** Linux is open-source, enabling collaborative development and innovation.
+- **Stability and Reliability:** Linux is renowned for its stability and reliability, making it ideal for critical systems.
+- **Security:** Linux offers robust security features to safeguard systems and data.
+- **Customizability:** Linux allows users to customize their systems according to their specific requirements.
+- **Cost-Effective:** Linux is free to use, reducing software licensing costs.
 
 
-# To access the value :
-echo $greeting
+## <span style="color: blue"> Linux Commands for System Information: </span>
 
-```
+`uname` 
+ -  Displays system information about the operating system.
 
-- run: `chmod +x var.sh`
-- Then: `./var.sh` # output: Hello World!
-- 
-## variable interpolation
+`uname --help`
+  - Provides help and usage information for the uname command.
 
-```bash
-#!/bin/bash
+`uname --processor`
+-  Prints the processor (CPU) type or architecture.
 
-greeting="Hello World!!"
-count=42
-fruits=("apple", "banana", "orange")
+`uname -n` 
+- Shows the network (host) name of the machine.
 
-name="Ahmed"
-
-echo  "Hello,  $name"
-
-```
-
-# Parameters
-
-- The parameters are accessed using dollar signs followed by the number representing their position, such as $1 for the first parameter. 
--  a special variable, $, followed by @, to echo all parameters passed to the script. 
--  By allowing inputs through parameters, scripts become more **interactive and versatile.**
--  For example: `./script.sh parameter1 parameter2`
--  open scrtipt:
-```bash
-
-  #!/bin/bash
+`uname -a` 
+-  Prints all system information, including kernel version and architecture.
 
 
-echo "Parameter 1: $1"
-echo "Parameter 2: $2"
-echo "Parameter 3: $3"
+## <span style="color: blue"> User and System Information: </span>
+ `whoami`  
+- Displays the username of the current user.
 
-```
-- Run file `./script.sh hello hi`
+`pwd`
+- Prints the current working directory.
+
+`cat /etc/shells` 
+-  Lists the available shells on the system.
+## <span style="color: blue"> Process Information and History: </span>
+`ps -p $$`
+- Shows process information for the current shell.
+
+`history` 
+-  Displays a list of previously executed commands.
+
+`history -c`
+-  Clears the command history.
+
+## <span style="color: blue"> Working with Files and Directories: </span>
+
+`ls -a` or `ll or ls -a` 
+- Lists all files and directories, including hidden ones.
+
+`mv source destination`  
+- Moves or renames a file.
+
+`cp source destination` 
+- Copies a file.
+
+## <span style="color: blue"> Downloading an image: </span>
+
+`curl https://cdn.britannica.com/39/7139-050-A88818BB/Himalayan-chocolate-point.jpg --output cat.jpg`
+- Downloads a file from a specified URL and saves it with the given filename.
+file filename: Outputs the type of file.
+
+`file cat.jpg`
+ - outputs whattype of file it is
+
+`mv cat.jpg cat` 
+ - Moves or renames a file.
+ 
+`cp cat cat.jpg`
+ - Copies a file.
+## <span style="color: blue"> File and Directory Manipulation: </span>
+`rm cat`
+- Removes the file named "cat".
+
+ `mkdir funny_stuff`
+- Creates a directory named "funny_stuff".
+
+`rm -r`  OR  `rm -rf`
+- Removes directories recursively. `-r` stands for recursive, and `-f` stands for force, which removes without confirmation.
+
+## <span style="color: blue"> File Creation and Editing: </span>
+
+`touch filename`
+- Creates an empty file with the specified filename.
+
+`nano chicken-joke.txt`
+- Opens the nano text editor to create or edit the "chicken-joke.txt" file.
+
+`cat chicken-joke.txt` 
+- Displays the contents of the "chicken-joke.txt" file.
 
 
-- Output : 
-  <br>
+## <span style="color: blue"> Viewing File Content </span>
 
-  ![image on parameter using scripting](images/parameters.png)
-## How to access ALL the parameters: 
+`head -2 chicken-joke.txt`
+- Displays the first 2 lines of the "chicken-joke.txt" file.
+
+`tail -2 chicken-joke.txt`
+- Displays the last 2 lines of the "chicken-joke.txt" file.
+
+`cat -n chicken-joke.txt`
+- Displays the contents of the "chicken-joke.txt" file with line numbers.
+
+## <span style="color: blue"> Searching within a Files: </span>
+
+`grep "chicken" chicken-joke.txt`
+
+- Searches for the word "chicken" in the "chicken-joke.txt" file and displays matching lines.
+
+## <span style="color: blue"> Moving files : </span>
+
+`mv chicken-joke.txt funny_stuff/` 
+- Moves the file "chicken-joke.txt" to the directory "funny_stuff".
+
+`mv funny_stuff/chicken-joke.txt .` 
+-  Moves the file "chicken-joke.txt" to the "funny_jokes" directory inside the "funny_stuff" directory
+
+`mv funny_stuff/funny_jokes/chicken-joke.txt funny_stuff/funny_jokes/bad_joke.txt` \
+- Renames the file "chicken-joke.txt" to "bad_joke.txt" inside the "funny_jokes" directory.
+
+## <span style="color: blue"> Adding and Removing Files: </span>
+
+`nano provision.sh`
+- Opens the nano text editor to create or edit a shell script named "provision.sh"
+
+`chmod u+x provision.sh`
+- Grants execute permission to the owner (user) of the file "provision.sh".
+
+## <span style="color: blue"> tree: </span>
+
+`tree`  displays directory structures in a tree-like format. It recursively lists all directories and files within a specified directory and its subdirectories.
+
+![](images/tree.linux.png)
+
+The tree command provides a visual representation of the directory hierarchy, making it easier to navigate and understand the organization of files and folders within a system. 
+
+## <span style="color: blue"> Permission Groups: </span>
+
+![](images/permissiongroups.gif)
+
+- **User, Group, Others:** Refers to the three categories of users who may have permissions on a file or directory.
+- **Read/Write/Execute:** Represents the different types of permissions that can be assigned to each group.
+
+## <span style="color: blue"> Changing File Permissions: </span>
+
+- `chmod 777 provision.sh:` Grants read, write, and execute permissions to all users for the file "provision.sh"
+
+## <span style="color: blue"> Making a Basic Shell Script: </span>
+
+`#!/bin/bash`
+- Declares the type of shell to be used in the script (in this case, Bash).
+
+#### Running the Script:
+1. `sh provision.sh`
+2. `bash provision.sh`
+3. `./provision.sh`
+
+## <span style="color: blue"> Making a persistent environment variable: </span>
+
+`printenv USER`  displays the value of the USER environment variable.
+
+_However, these changes are temporary and will be lost when you log out or close the terminal session._
+
+To make the environment variable persist across sessions:
+- add the variable assignment (MYNAME=zeynab) to the **.bashrc file** in your home directory. 
+- This file is executed every time you start a new Bash shell session,
+- You can edit the **.bashrc file** using `nano .bashrc` and add the variable assignment at the end of the file.
 
 
-```bash
-#!/bin/bash
+![](images/.bashrc.image.png)
 
 
-echo "Parameter 1: $1"
-echo "Parameter 2: $2"
-echo "Parameter 3: $3"
 
-echo "All Parameters: $@"
+## How to view information about processes running on the system:
 
-```
+`ps aux` 
+- This command displays information about all running processes.
+  
+`top` 
+- This command provides a dynamic real-time view of running system processes. Some useful shortcuts within top
+  
+**SHIFT + P: Sort processes by CPU usage**. <br>
+**SHIFT + M: Sort processes by memory usage.** <br>
+**SHIFT + N: Sort processes by newest.**
 
-output: 
-<br>
+### Parent and Child Processes:
+In Linux, processes can have parent-child relationships:
 
-  ![all_parameters](images/all_parameters.png)
+1. **Parent Processes:** These are processes that spawn other processes, known as child processes.
+2. **Child Processes: **These are processes created by other processes, known as parent processes.
 
+## When managing processes:
+
+1. Control: A parent process typically controls its child process.
+2. Process ID (PID): Each process has a unique process ID.
+3. Zombie Processes: If a parent process is forcibly killed while its child process remains active, the child process may become a zombie process.
+
+### Managing Processes:
+- `sleep 300`: This command suspends execution for 300 seconds.
+
+### kill Command:
+
+- `kill -15 PID`: Sends a termination signal (SIGTERM) to the specified process ID.
+- `kill -9 PID`: Sends a forceful termination signal (SIGKILL) to the specified process ID, forcibly terminating it.
+
+![](images/kill-command.png)
